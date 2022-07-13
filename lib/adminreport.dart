@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class AdminReport extends StatefulWidget {
   const AdminReport({Key? key}) : super(key: key);
 
@@ -38,7 +37,6 @@ class _AdminReportState extends State<AdminReport> {
               title: const Text('Add Staff'),
               onTap: () {},
             ),
-
             ListTile(
               title: const Text('Edit Staff'),
               onTap: () {
@@ -47,8 +45,7 @@ class _AdminReportState extends State<AdminReport> {
             ),
             ListTile(
               title: const Text('Log Out'),
-              onTap: () {
-              },
+              onTap: () {},
             ),
           ],
         ),

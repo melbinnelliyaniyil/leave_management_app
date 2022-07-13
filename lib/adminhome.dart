@@ -35,18 +35,15 @@ class _AdminHomeState extends State<AdminHome> {
             ),
             ListTile(
               title: const Text('Add Staff'),
-              onTap: () {
-              },
+              onTap: () {},
             ),
             ListTile(
               title: const Text('Edit Staff'),
-              onTap: () {
-              },
+              onTap: () {},
             ),
             ListTile(
               title: const Text('Log Out'),
-              onTap: () {
-              },
+              onTap: () {},
             ),
           ],
         ),
@@ -58,8 +55,7 @@ class _AdminHomeState extends State<AdminHome> {
               padding: const EdgeInsets.only(
                   left: 10, top: 40.0, right: 10, bottom: 10),
               child: InkWell(
-                onTap: () {
-                },
+                onTap: () {},
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -104,8 +100,7 @@ class _AdminHomeState extends State<AdminHome> {
               padding: const EdgeInsets.only(
                   left: 10, top: 0.0, right: 10, bottom: 10),
               child: InkWell(
-                onTap: () {
-                },
+                onTap: () {},
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(

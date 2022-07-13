@@ -32,7 +32,6 @@ class AdminProfile extends StatelessWidget {
               title: const Text('Add Staff'),
               onTap: () {},
             ),
-
             ListTile(
               title: const Text('Edit Staff'),
               onTap: () {
@@ -41,14 +40,11 @@ class AdminProfile extends StatelessWidget {
             ),
             ListTile(
               title: const Text('Log Out'),
-              onTap: () {
-              },
+              onTap: () {},
             ),
           ],
         ),
       ),
-
-
     );
   }
 }
