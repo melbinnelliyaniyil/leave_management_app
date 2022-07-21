@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:leave_management_app/adminhome.dart';
 import 'package:leave_management_app/emphome.dart';
 import 'package:leave_management_app/navigation.dart';
 
-import 'bloc/logauth.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -90,47 +89,15 @@ class _LoginState extends State<Login> {
                                 width: 100,height: 44,
                                 child: MaterialButton(
                                   onPressed: () {
-                                    BlocProvider.of<AuthBloc>(context).add(CheckOTP(
-                                        phone: emailController.text,
-                                        otpNumber: passwordController.text));
+
 
                                   },
                                   color: Colors.transparent,
                                   height: 50,
                                   minWidth: MediaQuery.of(context).size.width,
-                                  child: BlocConsumer<AuthBloc, AuthState>(
-                                    builder: (context, state) {
-                                      if (state is CheckingOtp) {
-                                        return Container(
-                                          height: 22,
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      } else {
-                                        return Text(
-                                          "Log in",
-                                          style: TextStyle(fontSize: 14),
-                                        );
-                                      }
-                                    },
-                                    listener: (context, state) {
-                                      if (state is OtpChecked) {
 
-                                        if(state.role =='Admin'){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHome()));
-                                        }
-
-                                        else if(state.role=='Employee'){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>EmpHome()));
-                                        }
-                                      } else if (state is OtpError) {
-                                        Fluttertoast.showToast(
-                                          msg: state.error,
-                                        );
-                                      }
-                                    },
                                   ),
                                 ),
-                              ),
 
                             ],
                           ),

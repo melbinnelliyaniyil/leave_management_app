@@ -11,7 +11,7 @@ class _ViewStaffState extends State<ViewStaff> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
         title: Text("Employee Directory"),
         backgroundColor: Colors.cyan,),
       body: SingleChildScrollView(

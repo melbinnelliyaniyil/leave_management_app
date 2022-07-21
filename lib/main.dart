@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:leave_management_app/addstaff.dart';
 import 'package:leave_management_app/applyleave.dart';
-import 'package:leave_management_app/bloc/logauth.dart';
+
 import 'package:leave_management_app/adminhome.dart';
 import 'package:leave_management_app/emphome.dart';
 import 'package:leave_management_app/login.dart';
@@ -22,11 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthBloc>(create: (context)=> AuthBloc())
-      ],
-      child: MaterialApp(
+    return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
@@ -42,7 +38,6 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.teal,
           ),
           home: const Login()
-      ),
     );
   }
 }
