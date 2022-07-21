@@ -5,8 +5,9 @@ import 'package:leave_management_app/applyleave.dart';
 
 import 'package:leave_management_app/adminhome.dart';
 import 'package:leave_management_app/emphome.dart';
+import 'package:leave_management_app/empnavigation.dart';
 import 'package:leave_management_app/login.dart';
-import 'package:leave_management_app/navigation.dart';
+import 'package:leave_management_app/adminnavigation.dart';
 import 'package:leave_management_app/login.dart';
 
 void main() {
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
             // is not restarted.
             primarySwatch: Colors.teal,
           ),
-          home: const Login()
+          home: const EmpNavigation()
     );
   }
 }

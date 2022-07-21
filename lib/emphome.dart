@@ -252,22 +252,7 @@ class _EmpHomeState extends State<EmpHome> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group_rounded),
-            label: 'Report',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.perm_identity_rounded),
-            label: 'Profile',
-          ),
-        ],
-      ),
+
     );
   }
 }

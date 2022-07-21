@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:leave_management_app/adminhome.dart';
 import 'package:leave_management_app/emphome.dart';
-import 'package:leave_management_app/navigation.dart';
+import 'package:leave_management_app/adminnavigation.dart';
 
 
 class Login extends StatefulWidget {
