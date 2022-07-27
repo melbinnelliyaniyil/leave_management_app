@@ -23,8 +23,6 @@ class AddStaffModel {
     return map;
   }
 
-
-
 }
 
 class User {

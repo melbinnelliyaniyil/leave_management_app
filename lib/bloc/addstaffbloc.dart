@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:leave_management_app/data/models/AddStaffModel.dart';
+import 'package:leave_management_app/data/models/addstaffmodel.dart';
 import 'package:leave_management_app/data/models/loginmodel.dart';
 import 'package:leave_management_app/data/repository.dart';
 import 'package:leave_management_app/helper/tempstorage.dart';
@@ -26,7 +26,7 @@ class AddStaffBloc extends Bloc<AddStaffEvent, AddStaffState> {
       "email": event.email.toString(),
       "phoneNumber": event.phoneNumber.toString(),
       "gender": event.gender.toString(),
-      "designationId":event.designationId.toString(),
+      "designationId":event.designation_id.toString(),
       "password":event.password.toString()
 
     };
@@ -41,7 +41,7 @@ class AddStaffBloc extends Bloc<AddStaffEvent, AddStaffState> {
       emit(StaffChecked(addStaffModel: addStaffModel));
     } else {
       print(addStaffModel.msg);
-      emit(OtpError(error: addStaffModel.msg.toString()));
+      emit(StaffError(error: addStaffModel.msg.toString()));
     }
   }
 }
@@ -54,8 +54,8 @@ class AddStaffEvent extends Equatable {
 
 
 class CheckSTAFF extends AddStaffEvent {
-  final String name, email,phoneNumber,gender,password;
-  CheckSTAFF({required this.name, required this.email,required this.phoneNumber,required this.gender,required this.password});
+  final String name, email,phoneNumber,gender,designation_id,password;
+  CheckSTAFF({required this.name, required this.email,required this.phoneNumber,required this.gender,required this.designation_id,required this.password});
 }
 
 
@@ -72,7 +72,7 @@ class StaffChecked extends AddStaffState {
   StaffChecked({required this.addStaffModel});
 }
 
-class OtpError extends AddStaffState {
+class StaffError extends AddStaffState {
   final String error;
-  OtpError({required this.error});
+  StaffError({required this.error});
 }

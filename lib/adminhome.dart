@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:leave_management_app/addstaff.dart';
+import 'package:leave_management_app/helper/tempstorage.dart';
+import 'package:leave_management_app/login.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);
@@ -35,7 +39,7 @@ class _AdminHomeState extends State<AdminHome> {
             ),
             ListTile(
               title: const Text('Add Staff'),
-              onTap: () {},
+              onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>AddStaff()));},
             ),
             ListTile(
               title: const Text('Edit Staff'),
@@ -43,7 +47,15 @@ class _AdminHomeState extends State<AdminHome> {
             ),
             ListTile(
               title: const Text('Log Out'),
-              onTap: () {},
+              onTap: () {
+                print(TempStorage.getToken());
+                //TempStorage.clearToken();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Login()),
+                        (Route<dynamic> route)=> false);
+                Fluttertoast.showToast(msg: "Logged Out");
+              },
             ),
           ],
         ),

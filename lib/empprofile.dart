@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:leave_management_app/helper/tempstorage.dart';
+import 'package:leave_management_app/login.dart';
 
 class EmpProfile extends StatefulWidget {
   const EmpProfile({Key? key}) : super(key: key);
@@ -45,7 +48,15 @@ class _EmpProfileState extends State<EmpProfile> {
             ),
             ListTile(
               title: const Text('Log Out'),
-              onTap: () {},
+              onTap: () {
+                print(TempStorage.getToken());
+                //TempStorage.clearToken();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Login()),
+                        (Route<dynamic> route)=> false);
+                Fluttertoast.showToast(msg: "Logged Out");
+              },
             ),
           ],
         ),

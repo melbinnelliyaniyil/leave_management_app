@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:leave_management_app/adminnavigation.dart';
+import 'package:leave_management_app/bloc/addstaffbloc.dart';
 
 import 'package:leave_management_app/main.dart';
+
+import 'adminhome.dart';
 
 enum SingingCharacter { Male, Female }
 class AddStaff extends StatefulWidget {
@@ -10,6 +16,10 @@ class AddStaff extends StatefulWidget {
 }
 
 class _AddStaffState extends State<AddStaff> {
+  TextEditingController nameController=TextEditingController(),
+  emailController=TextEditingController(),
+  genderController =TextEditingController(),
+  phoneController=TextEditingController();
   String title='stepper';
   bool _value = false;
   int val = 1;
@@ -65,7 +75,48 @@ class _AddStaffState extends State<AddStaff> {
 
 
             ),
-            OutlinedButton(onPressed: (){},child:Text("SUBMIT",style: TextStyle(color:Colors.green)),),
+            MaterialButton(onPressed: (){
+              BlocProvider.of<AddStaffBloc>(context).add(CheckSTAFF(
+                  name: nameController.text,
+                  email: emailController.text,
+                  phoneNumber:phoneController.text,
+                  password: "123456",
+                  designation_id: "62dfad7f5a0e2a2034baeb59",
+              gender: genderController.text));},child:BlocConsumer<AddStaffBloc, AddStaffState>(
+              builder: (context, state) {
+                if (state is CheckingStaff) {
+                  return Container(
+                    height: 22,
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return Text(
+                    "Submit",
+                    style: TextStyle(fontSize: 14),
+                  );
+                }
+              },
+              listener: (context, state) {
+                if (state is StaffChecked) {
+                  Fluttertoast.showToast(
+                    msg: "success"
+                  );
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminNavigation()));
+
+
+
+                } else if (state is StaffError) {
+                  Fluttertoast.showToast(
+                    msg: state.error,
+                  );
+                }
+                else{
+                  Container(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),),
           ],
         ),
       ),
@@ -79,10 +130,10 @@ class _AddStaffState extends State<AddStaff> {
       Step(title: Text('Name'),
         content: Column(
           children: [
-            TextFormField(decoration: InputDecoration(labelText:'First Name'),
+            TextFormField(controller: nameController
+              ,decoration: InputDecoration(labelText:'First Name'),
             ),
-            TextFormField(decoration: InputDecoration(labelText:'Last Name'),
-            ),
+
           ],
         ),
         isActive: _currentStep >=0,
@@ -91,7 +142,8 @@ class _AddStaffState extends State<AddStaff> {
       Step(title: Text('Email'),
         content: Column(
           children: [
-            TextFormField(decoration: InputDecoration(labelText:'Email'),
+            TextFormField(
+              controller: emailController,decoration: InputDecoration(labelText:'Email'),
             ),
           ],
         ),
@@ -101,7 +153,8 @@ class _AddStaffState extends State<AddStaff> {
       Step(title: Text('Mobile '),
         content: Column(
           children: [
-            TextFormField(decoration: InputDecoration(labelText:'Mobile No'),
+            TextFormField(controller: phoneController,
+              decoration: InputDecoration(labelText:'Mobile No'),
             ),
           ],
         ),
@@ -110,36 +163,11 @@ class _AddStaffState extends State<AddStaff> {
       ),
       Step(title: Text('Gender '),
         content: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            ListTile(
-              title: const Text('Male'),
-              leading: Radio<SingingCharacter>(
-                activeColor: Colors.blue,
-                value: SingingCharacter.Male,
-                groupValue: _character,
-                onChanged: (SingingCharacter? value) {
-                  setState(() {
-                    _character = value;
-                  });
-                },
-              ),
+            TextFormField(controller:genderController
+        ,decoration: InputDecoration(labelText:'gender  (male/female)'),
             ),
-            ListTile(
-              title: const Text('Female'),
-              leading: Radio<SingingCharacter>(
-                activeColor: Colors.blue,
-                value: SingingCharacter.Female,
-                groupValue: _character,
-                onChanged: (SingingCharacter? value) {
-                  setState(() {
-                    _character = value;
-                  });
-                },
-              ),
-            )
           ],
-
         ),
         isActive: _currentStep >= 3,
         state : _currentStep <= 3 ?StepState.editing :StepState.complete,

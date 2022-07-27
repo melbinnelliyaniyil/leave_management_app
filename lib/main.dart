@@ -5,6 +5,7 @@ import 'package:leave_management_app/addstaff.dart';
 import 'package:leave_management_app/applyleave.dart';
 
 import 'package:leave_management_app/adminhome.dart';
+import 'package:leave_management_app/bloc/addstaffbloc.dart';
 import 'package:leave_management_app/bloc/logbloc.dart';
 import 'package:leave_management_app/emphome.dart';
 import 'package:leave_management_app/empnavigation.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(create: (context)=> AuthBloc())
+        BlocProvider<AuthBloc>(create: (context)=> AuthBloc()),
+        BlocProvider<AddStaffBloc>(create: (context)=> AddStaffBloc())
       ],
       child: MaterialApp(
             debugShowCheckedModeBanner: false,
