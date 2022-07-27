@@ -6,9 +6,12 @@ import 'package:leave_management_app/applyleave.dart';
 
 import 'package:leave_management_app/adminhome.dart';
 import 'package:leave_management_app/bloc/addstaffbloc.dart';
+import 'package:leave_management_app/bloc/applyleavebloc.dart';
+import 'package:leave_management_app/bloc/leavecountbloc.dart';
 import 'package:leave_management_app/bloc/logbloc.dart';
 import 'package:leave_management_app/emphome.dart';
 import 'package:leave_management_app/empnavigation.dart';
+import 'package:leave_management_app/helper/leaveaccept.dart';
 import 'package:leave_management_app/login.dart';
 import 'package:leave_management_app/adminnavigation.dart';
 import 'package:leave_management_app/login.dart';
@@ -29,7 +32,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(create: (context)=> AuthBloc()),
-        BlocProvider<AddStaffBloc>(create: (context)=> AddStaffBloc())
+        BlocProvider<AddStaffBloc>(create: (context)=> AddStaffBloc()),
+        BlocProvider<ApplyLeaveBloc>(create: (context)=> ApplyLeaveBloc()),
+        BlocProvider<LeaveCountBloc>(create: (context)=> LeaveCountBloc())
       ],
       child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -46,7 +51,7 @@ class MyApp extends StatelessWidget {
               // is not restarted.
               primarySwatch: Colors.teal,
             ),
-            home: const Login()
+            home: const leaveaccept()
       ),
     );
   }

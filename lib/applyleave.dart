@@ -1,5 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leave_management_app/bloc/applyleavebloc.dart';
+import 'package:leave_management_app/emphome.dart';
+
+import 'empnavigation.dart';
 
 class ApplyLeave extends StatefulWidget {
   const ApplyLeave({Key? key}) : super(key: key);
@@ -7,13 +14,21 @@ class ApplyLeave extends StatefulWidget {
   @override
   State<ApplyLeave> createState() => _ApplyLeaveState();
 }
+enum SingingCharacter { Male, Female }
+
+SingingCharacter? _character = SingingCharacter.Male;
+
 
 class _ApplyLeaveState extends State<ApplyLeave> {
   int _value = 1;
   List items = ['Casual leave', 'Sick leave', 'Duty leave'];
+  List dayType=['Full Day','First Half','Second Half'];
   String? selectedItem = 'Casual leave';
   DateTimeRange dateRange =
       DateTimeRange(start: DateTime(2022, 6, 01), end: DateTime(2030, 12, 31));
+  var reason=TextEditingController();
+
+  String? gender;
   @override
   Widget build(BuildContext context) {
     final start = dateRange.start;
@@ -46,10 +61,13 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                           child: Text(
                             item,
 
-                          )))
+                          )
+                  ))
                       .toList(),
-                  onChanged: (item) =>
-                      setState(() => selectedItem = item as String?),
+                  onChanged: (item){
+                      setState(() => selectedItem = item as String?);
+                      print(item);
+                  },
                 ),
               ),
               Text(
@@ -65,6 +83,8 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                     onChanged: (value) {
                       setState(() {
                         _value = value as int;
+                        _value--;
+                        print(dayType[_value]);
                       });
                     },
                   ),
@@ -80,6 +100,8 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                     onChanged: (value) {
                       setState(() {
                         _value = value as int;
+                        _value--;
+                        print(dayType[_value]);
                       });
                     },
                   ),
@@ -95,6 +117,8 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                     onChanged: (value) {
                       setState(() {
                         _value = value as int;
+                        _value--;
+                        print(dayType[_value]);
                       });
                     },
                   ),
@@ -138,8 +162,7 @@ class _ApplyLeaveState extends State<ApplyLeave> {
               TextField(
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
-
-                
+                controller: reason,
                 style: TextStyle(),
                 obscureText: false,
                 decoration: InputDecoration(
@@ -158,20 +181,47 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                   child: Row(
                     children: [
                       MaterialButton(onPressed: (){
-                        // BlocProvider.of<ApplyLeaveBloc>(context).add(CheckLEAVE(
-                        //     name: nameController.text,
-                        //     email: emailController.text,
-                        //     phoneNumber:phoneController.text,
-                        //     password: "123456",
-                        //     designation_id: "62dfad7f5a0e2a2034baeb59",
-                        //     gender: genderController.text));
+                        BlocProvider.of<ApplyLeaveBloc>(context).add(CheckLEAVE(
+                            leave_desc: reason.text,
+                          leave_from: dateRange.start.toString(),
+                          leave_to: dateRange.end.toString(),
+                          day_type: dayType[_value],
+                          leave_type: items.toString()
+                        )
+                        );
                       }
-                          ,child: Text("Submit"),
+                          ,child: BlocConsumer<ApplyLeaveBloc, ApplyLeaveState>(
+                          builder: (context, state) {
+                            if (state is CheckingLeave) {
+                              return Container(
+                                height: 22,
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return Text(
+                                "Submit",
+                                style: TextStyle(fontSize: 14),
+                              );
+                            }
+                          },
+                          listener: (context, state) {
+                            if (state is LeaveChecked) {
+                              Fluttertoast.showToast(msg: state.applyLeaveModel.status.toString());
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>EmpNavigation()));
+                            } else if (state is LeaveError) {
+                              Fluttertoast.showToast(
+                                msg: state.error,
+                              );
+                            }
+                          },
+                        ),
                         color: Colors.teal,
                       ),
-                      SizedBox(width: 60,),
-                      MaterialButton(onPressed: (){}
-                        ,child: Text("Cancel"),
+                      const SizedBox(width: 60,),
+                      MaterialButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>EmpNavigation()));
+                      }
+                        ,child: const Text("Cancel"),
                         color: Colors.teal,
                       ),
                     ],

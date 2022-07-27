@@ -1,6 +1,9 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leave_management_app/addstaff.dart';
+import 'package:leave_management_app/bloc/leavecountbloc.dart';
 import 'package:leave_management_app/helper/tempstorage.dart';
 import 'package:leave_management_app/login.dart';
 
@@ -12,6 +15,14 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
+  void initState(){
+
+
+    super.initState();
+
+    BlocProvider.of<LeaveCountBloc>(context).add(CheckCOUNT(
+    ));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,59 +71,115 @@ class _AdminHomeState extends State<AdminHome> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 10, top: 40.0, right: 10, bottom: 10),
-              child: InkWell(
-                onTap: () {},
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Total Applications",
-                                style: TextStyle(fontSize: 17),
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(fontSize: 27),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 180,
-                          ),
-                          Icon(Icons.folder_rounded)
-                        ],
+      body: BlocBuilder<LeaveCountBloc, LeaveCountState>(
+  builder: (context, state)
+    {
+      if (state is CountChecked) {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10, top: 40.0, right: 10, bottom: 10),
+                child: InkWell(
+                  onTap: () {},
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Total Applications",
+                                  style: TextStyle(fontSize: 17),
+                                ),
+                                Text(
+                                  state.leaveCountModel.totalcount.toString(),
+                                  style: TextStyle(fontSize: 27),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: 180,
+                            ),
+                            Icon(Icons.folder_rounded)
+                          ],
+                        ),
                       ),
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * .10,
+                      color: Colors.blue,
                     ),
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * .10,
-                    color: Colors.blue,
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 10, top: 0.0, right: 10, bottom: 10),
-              child: InkWell(
-                onTap: () {},
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10, top: 0.0, right: 10, bottom: 10),
+                child: InkWell(
+                  onTap: () {},
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Accepted Applications",
+                                  style: TextStyle(fontSize: 17),
+                                ),
+                                Text(
+                                  "0",
+                                  style: TextStyle(fontSize: 27),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: 150,
+                            ),
+                            Icon(Icons.thumb_up_alt_rounded)
+                          ],
+                        ),
+                      ),
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * .10,
+                      color: Colors.green,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10, top: 0.0, right: 10, bottom: 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -127,11 +194,11 @@ class _AdminHomeState extends State<AdminHome> {
                                 height: 20,
                               ),
                               Text(
-                                "Accepted Applications",
+                                "Rejected Applications",
                                 style: TextStyle(fontSize: 17),
                               ),
                               Text(
-                                "0",
+                                state.leaveCountModel.rejectedleave.toString(),
                                 style: TextStyle(fontSize: 27),
                               )
                             ],
@@ -139,98 +206,80 @@ class _AdminHomeState extends State<AdminHome> {
                           SizedBox(
                             width: 150,
                           ),
-                          Icon(Icons.thumb_up_alt_rounded)
+                          Icon(Icons.thumb_down_alt_rounded)
                         ],
                       ),
                     ),
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * .10,
-                    color: Colors.green,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * .10,
+                    color: Colors.red,
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 10, top: 0.0, right: 10, bottom: 10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Rejected Applications",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            Text(
-                              "0",
-                              style: TextStyle(fontSize: 27),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          width: 150,
-                        ),
-                        Icon(Icons.thumb_down_alt_rounded)
-                      ],
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10, top: 0.0, right: 10, bottom: 10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "Pending Applications",
+                                style: TextStyle(fontSize: 17),
+                              ),
+                              Text(
+                                state.leaveCountModel.pendingleave.toString(),
+                                style: TextStyle(fontSize: 27),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            width: 150,
+                          ),
+                          Icon(Icons.hourglass_bottom_rounded)
+                        ],
+                      ),
                     ),
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * .10,
+                    color: Colors.yellow,
                   ),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * .10,
-                  color: Colors.red,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 10, top: 0.0, right: 10, bottom: 10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Pending Applications",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            Text(
-                              "0",
-                              style: TextStyle(fontSize: 27),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          width: 150,
-                        ),
-                        Icon(Icons.hourglass_bottom_rounded)
-                      ],
-                    ),
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * .10,
-                  color: Colors.yellow,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      }
+      else if (state is CheckingCount) {
+       return CircularProgressIndicator();
+      }
+      else {
+       return Container(child: Text("data"),);
+      }
+
+  }
+),
     );
   }
 }
