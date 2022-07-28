@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leave_management_app/addstaff.dart';
+import 'package:leave_management_app/bloc/allleavebloc.dart';
 import 'package:leave_management_app/helper/tempstorage.dart';
 import 'package:leave_management_app/login.dart';
 
@@ -12,6 +14,14 @@ class leaveaccept extends StatefulWidget {
 }
 
 class _leaveacceptState extends State<leaveaccept> {
+  void initState(){
+
+
+    super.initState();
+
+    BlocProvider.of<AllLeaveBloc>(context).add(CheckALLLEAVE(
+    ));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

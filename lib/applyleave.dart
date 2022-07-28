@@ -206,7 +206,7 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                           },
                           listener: (context, state) {
                             if (state is LeaveChecked) {
-                              Fluttertoast.showToast(msg: state.applyLeaveModel.status.toString());
+                              Fluttertoast.showToast(msg: "Successfully applied");
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>EmpNavigation()));
                             } else if (state is LeaveError) {
                               Fluttertoast.showToast(

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leave_management_app/addstaff.dart';
 import 'package:leave_management_app/bloc/leavecountbloc.dart';
+import 'package:leave_management_app/helper/leaveaccept.dart';
 import 'package:leave_management_app/helper/tempstorage.dart';
 import 'package:leave_management_app/login.dart';
 
@@ -85,46 +86,50 @@ class _AdminHomeState extends State<AdminHome> {
                   onTap: () {},
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  "Total Applications",
-                                  style: TextStyle(fontSize: 17),
-                                ),
-                                Text(
-                                  state.leaveCountModel.totalcount.toString(),
-                                  style: TextStyle(fontSize: 27),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              width: 180,
-                            ),
-                            Icon(Icons.folder_rounded)
-                          ],
+                    child: InkWell( onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>leaveaccept()));
+                    },
+                      child: Container(
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 12,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    "Total Applications",
+                                    style: TextStyle(fontSize: 17),
+                                  ),
+                                  Text(
+                                    state.leaveCountModel.totalcount.toString(),
+                                    style: TextStyle(fontSize: 27),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: 180,
+                              ),
+                              Icon(Icons.folder_rounded)
+                            ],
+                          ),
                         ),
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * .10,
+                        color: Colors.blue,
                       ),
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height * .10,
-                      color: Colors.blue,
                     ),
                   ),
                 ),
