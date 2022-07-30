@@ -4,7 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leave_management_app/data/models/AllLeaveModel.dart';
 import 'package:leave_management_app/data/models/AcceptedLeaveModel.dart';
 import 'package:leave_management_app/data/models/PendingLeaveModel.dart';
+import 'package:leave_management_app/data/models/ProfileModel.dart';
 import 'package:leave_management_app/data/models/RejectLeaveModel.dart';
+import 'package:leave_management_app/data/models/RejectedLeaveModel.dart';
 import 'package:leave_management_app/data/models/addstaffmodel.dart';
 import 'package:leave_management_app/data/models/applyleavemodel.dart';
 import 'package:leave_management_app/data/models/loginmodel.dart';
@@ -115,6 +117,22 @@ class Repository{
     return acceptedLeaveModel;
   }
 
+  //////////////rejected leave////////////////////////////
+
+  Future<RejectedLeaveModel> rejectedleave({required String url}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.get(url);
+    final RejectedLeaveModel rejectedLeaveModel = RejectedLeaveModel.fromJson(response);
+    return rejectedLeaveModel;
+  }
+
 ////////
   Future<ApproveLeaveModel> approveleave({required String url,dynamic data}) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -142,5 +160,19 @@ class Repository{
     final dynamic response = await WebClient.post(url,data);
     final RejectLeaveModel rejectLeaveModel = RejectLeaveModel.fromJson(response);
     return rejectLeaveModel;
+  }
+  /////////////////////profile//////////////////////////////
+  Future<ProfileModel> getprofile({required String url}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.get(url);
+    final ProfileModel profileModel = ProfileModel.fromJson(response);
+    return profileModel;
   }
 }

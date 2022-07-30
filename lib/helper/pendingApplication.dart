@@ -147,7 +147,7 @@ class _PendingApplicationState extends State<PendingApplication> {
                                     width: 20,
                                   ),
                                   MaterialButton(
-                                    color: Colors.green,
+                                    color: Colors.red,
                                     onPressed: () {
                                       BlocProvider.of<RejectLeaveBloc>(context)
                                           .add(CheckREJECT(

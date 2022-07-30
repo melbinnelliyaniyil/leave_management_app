@@ -24,12 +24,12 @@ class AcceptedLeaveBloc extends Bloc<AcceptedLeaveEvent, AcceptedLeaveState> {
     // print('"body'+body.toString());
 
     acceptedLeaveModel =
-    await Repository().acceptedleave(url: '/leave/viewleavestatuspending',);
+    await Repository().acceptedleave(url: '/leave/viewleavestatusapproved',);
     if (acceptedLeaveModel.status == true) {
 
 
 
-      emit(AcceptedLeaveChecked(leaveAcceptedLeaveModel: acceptedLeaveModel));
+      emit(AcceptedLeaveChecked(acceptedLeaveModel: acceptedLeaveModel));
     } else {
       print(acceptedLeaveModel.msg);
       emit(AcceptedLeaveError(error: acceptedLeaveModel.msg.toString()));
@@ -57,8 +57,8 @@ class AcceptedLeaveState extends Equatable {
 
 class CheckingAcceptedLeave extends AcceptedLeaveState {}
 class AcceptedLeaveChecked extends AcceptedLeaveState {
-  final AcceptedLeaveModel leaveAcceptedLeaveModel;
-  AcceptedLeaveChecked({required this.leaveAcceptedLeaveModel});
+  final AcceptedLeaveModel acceptedLeaveModel;
+  AcceptedLeaveChecked({required this.acceptedLeaveModel});
 }
 
 class AcceptedLeaveError extends AcceptedLeaveState {

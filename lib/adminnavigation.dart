@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leave_management_app/adminhome.dart';
 import 'package:leave_management_app/adminprofile.dart';
 import 'package:leave_management_app/adminreport.dart';
+import 'package:leave_management_app/empprofile.dart';
 
 class AdminNavigation extends StatefulWidget {
   const AdminNavigation({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class _AdminNavigationState extends State<AdminNavigation> {
   final screens = [
     AdminHome(),
     AdminReport(),
-    AdminProfile(),
+    EmpProfile(),
   ];
   @override
   Widget build(BuildContext context) {

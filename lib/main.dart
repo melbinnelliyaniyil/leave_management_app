@@ -5,6 +5,7 @@ import 'package:leave_management_app/addstaff.dart';
 import 'package:leave_management_app/applyleave.dart';
 
 import 'package:leave_management_app/adminhome.dart';
+import 'package:leave_management_app/bloc/acceptedleavebloc.dart';
 import 'package:leave_management_app/bloc/addstaffbloc.dart';
 import 'package:leave_management_app/bloc/allleavebloc.dart';
 import 'package:leave_management_app/bloc/applyleavebloc.dart';
@@ -12,12 +13,16 @@ import 'package:leave_management_app/bloc/approveleavebloc.dart';
 import 'package:leave_management_app/bloc/leavecountbloc.dart';
 import 'package:leave_management_app/bloc/logbloc.dart';
 import 'package:leave_management_app/bloc/pendingleavebloc.dart';
+import 'package:leave_management_app/bloc/profilebloc.dart';
+import 'package:leave_management_app/bloc/rejectleavebloc.dart';
 import 'package:leave_management_app/emphome.dart';
 import 'package:leave_management_app/empnavigation.dart';
 import 'package:leave_management_app/helper/pendingApplication.dart';
 import 'package:leave_management_app/login.dart';
 import 'package:leave_management_app/adminnavigation.dart';
 import 'package:leave_management_app/login.dart';
+
+import 'bloc/rejectedleavebloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,7 +46,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<AllLeaveBloc>(create: (context)=> AllLeaveBloc()),
         BlocProvider<PendingLeaveBloc>(create: (context)=> PendingLeaveBloc()),
         BlocProvider<ApproveLeaveBloc>(create: (context)=> ApproveLeaveBloc()),
-
+        BlocProvider<RejectLeaveBloc>(create: (context)=> RejectLeaveBloc()),
+        BlocProvider<AcceptedLeaveBloc>(create: (context)=> AcceptedLeaveBloc()),
+        BlocProvider<RejectedLeaveBloc>(create: (context)=> RejectedLeaveBloc()),
+        BlocProvider<ProfileBloc>(create: (context)=> ProfileBloc()),
       ],
       child: MaterialApp(
             debugShowCheckedModeBanner: false,
