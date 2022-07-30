@@ -18,6 +18,7 @@ class _LoginState extends State<Login> {
   @override
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  bool _isObscure = true;
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -53,6 +54,10 @@ class _LoginState extends State<Login> {
                             controller: emailController,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  onPressed: (){},
+                                  icon: Icon(Icons.email),
+                                ),
                                 fillColor: Colors.grey.shade100,
                                 filled: true,
                                 hintText: "Email",
@@ -65,9 +70,20 @@ class _LoginState extends State<Login> {
                           ),
                           TextField(
                             controller: passwordController,
+                            obscureText: _isObscure,
                             style: TextStyle(),
-                            obscureText: true,
+
                             decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _isObscure ? Icons.visibility : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _isObscure = !_isObscure;
+                                    });
+                                  },
+                                ),
                                 fillColor: Colors.grey.shade100,
                                 filled: true,
                                 hintText: "Password",
@@ -104,7 +120,8 @@ class _LoginState extends State<Login> {
                                     builder: (context, state) {
                                       if (state is CheckingOtp) {
                                         return Container(
-                                          height: 22,
+                                          height: 33,
+                                          width: 33,
                                           child: CircularProgressIndicator(),
                                         );
                                       } else {

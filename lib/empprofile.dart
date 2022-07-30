@@ -292,10 +292,7 @@ class _EmpProfileState extends State<EmpProfile> {
                 ) ;
               }
               else if(state is CheckingProfile) {
-                return Center(child: CupertinoActivityIndicator(
-                  radius: 30,
-                  color: Color(0xfffad249),
-                ));
+                return Center(child: CircularProgressIndicator());
               }
               else {
                 return Container();

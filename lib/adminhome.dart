@@ -273,7 +273,7 @@ class _AdminHomeState extends State<AdminHome> {
             ),
           );
         } else if (state is CheckingCount) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         } else {
           return Container(
             child: Text("data"),
