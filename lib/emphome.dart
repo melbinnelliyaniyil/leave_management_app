@@ -59,7 +59,7 @@ class _EmpHomeState extends State<EmpHome> {
               title: const Text('Log Out'),
               onTap: () {
                 print(TempStorage.getToken());
-                //TempStorage.clearToken();
+                TempStorage.clearToken();
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => Login()),

@@ -12,10 +12,13 @@ import 'package:leave_management_app/helper/tempstorage.dart';
 
 
 class AllLeaveBloc extends Bloc<AllLeaveEvent, AllLeaveState> {
+
   AllLeaveBloc() : super(AllLeaveState()) {
 
     on<CheckALLLEAVE>(_checkAllLeave);
   }
+
+
 
 
 
@@ -29,16 +32,19 @@ class AllLeaveBloc extends Bloc<AllLeaveEvent, AllLeaveState> {
     allLeaveModel =
     await Repository().allLeave(url: '/leave/viewsallleave',);
     if (allLeaveModel.status == true) {
+      await TempStorage.addId(allLeaveModel.user.toString());
 
 
 
-      emit(AllLeaveChecked(leaveAllLeaveModel: allLeaveModel));
+      emit(AllLeaveChecked(allLeaveModel: allLeaveModel));
     } else {
       print(allLeaveModel.msg);
       emit(AllLeaveError(error: allLeaveModel.msg.toString()));
     }
   }
 }
+
+
 //events
 class AllLeaveEvent extends Equatable {
   @override
@@ -60,8 +66,8 @@ class AllLeaveState extends Equatable {
 
 class CheckingAllLeave extends AllLeaveState {}
 class AllLeaveChecked extends AllLeaveState {
-  final AllLeaveModel leaveAllLeaveModel;
-  AllLeaveChecked({required this.leaveAllLeaveModel});
+  final AllLeaveModel allLeaveModel;
+  AllLeaveChecked({required this.allLeaveModel});
 }
 
 class AllLeaveError extends AllLeaveState {

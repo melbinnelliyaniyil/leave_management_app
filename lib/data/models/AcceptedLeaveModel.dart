@@ -1,37 +1,41 @@
-class AllLeaveModel {
-  AllLeaveModel({
+class AcceptedLeaveModel {
+  AcceptedLeaveModel({
       this.status, 
       this.msg, 
-      this.user,});
+      this.data, 
+      this.length,});
 
-  AllLeaveModel.fromJson(dynamic json) {
+  AcceptedLeaveModel.fromJson(dynamic json) {
     status = json['status'];
     msg = json['msg'];
-    if (json['user'] != null) {
-      user = [];
-      json['user'].forEach((v) {
-        user?.add(User.fromJson(v));
+    if (json['data'] != null) {
+      data = [];
+      json['data'].forEach((v) {
+        data?.add(Data.fromJson(v));
       });
     }
+    length = json['length'];
   }
   bool? status;
   String? msg;
-  List<User>? user;
+  List<Data>? data;
+  int? length;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['status'] = status;
     map['msg'] = msg;
-    if (user != null) {
-      map['user'] = user?.map((v) => v.toJson()).toList();
+    if (data != null) {
+      map['data'] = data?.map((v) => v.toJson()).toList();
     }
+    map['length'] = length;
     return map;
   }
 
 }
 
-class User {
-  User({
+class Data {
+  Data({
       this.id, 
       this.userid, 
       this.leaveType, 
@@ -43,7 +47,7 @@ class User {
       this.status, 
       this.v,});
 
-  User.fromJson(dynamic json) {
+  Data.fromJson(dynamic json) {
     id = json['_id'];
     userid = json['userid'] != null ? Userid.fromJson(json['userid']) : null;
     leaveType = json['leave_type'];

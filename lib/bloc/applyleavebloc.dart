@@ -53,7 +53,8 @@ class ApplyLeaveEvent extends Equatable {
 
 
 
-class CheckLEAVE extends ApplyLeaveEvent {
+class
+CheckLEAVE extends ApplyLeaveEvent {
   final String leave_type, leave_desc,leave_to,leave_from,day_type;
   CheckLEAVE({required this.leave_type, required this.leave_desc,required this.leave_to,required this.leave_from,required this.day_type});
 }

@@ -186,7 +186,7 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                           leave_from: dateRange.start.toString(),
                           leave_to: dateRange.end.toString(),
                           day_type: dayType[_value],
-                          leave_type: items.toString()
+                          leave_type: selectedItem.toString()
                         )
                         );
                       }

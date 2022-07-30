@@ -1,37 +1,41 @@
-class AllLeaveModel {
-  AllLeaveModel({
+class PendingLeaveModel {
+  PendingLeaveModel({
       this.status, 
       this.msg, 
-      this.user,});
+      this.data, 
+      this.length,});
 
-  AllLeaveModel.fromJson(dynamic json) {
+  PendingLeaveModel.fromJson(dynamic json) {
     status = json['status'];
     msg = json['msg'];
-    if (json['user'] != null) {
-      user = [];
-      json['user'].forEach((v) {
-        user?.add(User.fromJson(v));
+    if (json['data'] != null) {
+      data = [];
+      json['data'].forEach((v) {
+        data?.add(Data.fromJson(v));
       });
     }
+    length = json['length'];
   }
   bool? status;
   String? msg;
-  List<User>? user;
+  List<Data>? data;
+  int? length;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['status'] = status;
     map['msg'] = msg;
-    if (user != null) {
-      map['user'] = user?.map((v) => v.toJson()).toList();
+    if (data != null) {
+      map['data'] = data?.map((v) => v.toJson()).toList();
     }
+    map['length'] = length;
     return map;
   }
 
 }
 
-class User {
-  User({
+class Data {
+  Data({
       this.id, 
       this.userid, 
       this.leaveType, 
@@ -43,7 +47,7 @@ class User {
       this.status, 
       this.v,});
 
-  User.fromJson(dynamic json) {
+  Data.fromJson(dynamic json) {
     id = json['_id'];
     userid = json['userid'] != null ? Userid.fromJson(json['userid']) : null;
     leaveType = json['leave_type'];
@@ -92,7 +96,6 @@ class Userid {
       this.phoneNumber, 
       this.name, 
       this.email, 
-      this.password, 
       this.designationId, 
       this.designationName, 
       this.status, 
@@ -104,7 +107,6 @@ class Userid {
     phoneNumber = json['phoneNumber'];
     name = json['name'];
     email = json['email'];
-    password = json['password'];
     designationId = json['designationId'];
     designationName = json['designationName'];
     status = json['status'];
@@ -115,7 +117,6 @@ class Userid {
   int? phoneNumber;
   String? name;
   String? email;
-  String? password;
   String? designationId;
   String? designationName;
   String? status;
@@ -128,7 +129,6 @@ class Userid {
     map['phoneNumber'] = phoneNumber;
     map['name'] = name;
     map['email'] = email;
-    map['password'] = password;
     map['designationId'] = designationId;
     map['designationName'] = designationName;
     map['status'] = status;
