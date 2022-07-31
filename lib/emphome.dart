@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:leave_management_app/applyleave.dart';
+import 'package:leave_management_app/bloc/leavecountbloc.dart';
+import 'package:leave_management_app/bloc/selfcountbloc.dart';
 import 'package:leave_management_app/helper/tempstorage.dart';
 
 
@@ -16,6 +19,11 @@ class EmpHome extends StatefulWidget {
 }
 
 class _EmpHomeState extends State<EmpHome> {
+  void initState() {
+    super.initState();
+
+    BlocProvider.of<SelfCountBloc>(context).add(CheckSELFCOUNT());
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +78,11 @@ class _EmpHomeState extends State<EmpHome> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
+      body:
+      BlocBuilder<SelfCountBloc, SelfCountState>(
+          builder: (context, state) {
+            if (state is SelfCountChecked) {
+              return SingleChildScrollView(
         child: Column(
           children: [
             Padding(
@@ -103,7 +115,7 @@ class _EmpHomeState extends State<EmpHome> {
                                 style: TextStyle(fontSize: 17),
                               ),
                               Text(
-                                "-",
+                                state.selfCountModel.totalcount.toString(),
                                 style: TextStyle(fontSize: 27),
                               )
                             ],
@@ -152,7 +164,7 @@ class _EmpHomeState extends State<EmpHome> {
                                 style: TextStyle(fontSize: 17),
                               ),
                               Text(
-                                "-",
+                                state.selfCountModel.approvedleave!.toString(),
                                 style: TextStyle(fontSize: 27),
                               )
                             ],
@@ -179,6 +191,7 @@ class _EmpHomeState extends State<EmpHome> {
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   child: Center(
+
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -196,8 +209,8 @@ class _EmpHomeState extends State<EmpHome> {
                               style: TextStyle(fontSize: 17),
                             ),
                             Text(
-                              "-",
-                              style: TextStyle(fontSize: 27),
+                              state.selfCountModel.rejectedleave
+                                  .toString(),                              style: TextStyle(fontSize: 27),
                             )
                           ],
                         ),
@@ -238,7 +251,7 @@ class _EmpHomeState extends State<EmpHome> {
                               style: TextStyle(fontSize: 17),
                             ),
                             Text(
-                              "-",
+                              state.selfCountModel.pendingleave.toString(),
                               style: TextStyle(fontSize: 27),
                             )
                           ],
@@ -258,7 +271,15 @@ class _EmpHomeState extends State<EmpHome> {
             ),
           ],
         ),
-      ),
+      );
+  } else if (state is SelfCountChecking) {
+  return Center(child: CircularProgressIndicator());
+  } else {
+  return Container(
+  child: Text("data"),
+  );
+  }
+}),
 
     );
   }

@@ -15,6 +15,7 @@ import 'package:leave_management_app/bloc/logbloc.dart';
 import 'package:leave_management_app/bloc/pendingleavebloc.dart';
 import 'package:leave_management_app/bloc/profilebloc.dart';
 import 'package:leave_management_app/bloc/rejectleavebloc.dart';
+import 'package:leave_management_app/bloc/selfcountbloc.dart';
 import 'package:leave_management_app/emphome.dart';
 import 'package:leave_management_app/empnavigation.dart';
 import 'package:leave_management_app/helper/pendingApplication.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<AcceptedLeaveBloc>(create: (context)=> AcceptedLeaveBloc()),
         BlocProvider<RejectedLeaveBloc>(create: (context)=> RejectedLeaveBloc()),
         BlocProvider<ProfileBloc>(create: (context)=> ProfileBloc()),
+        BlocProvider<SelfCountBloc>(create: (context)=> SelfCountBloc()),
       ],
       child: MaterialApp(
             debugShowCheckedModeBanner: false,

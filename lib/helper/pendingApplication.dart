@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leave_management_app/addstaff.dart';
 import 'package:leave_management_app/bloc/approveleavebloc.dart';
+import 'package:leave_management_app/bloc/leavecountbloc.dart';
 import 'package:leave_management_app/bloc/pendingleavebloc.dart';
 import 'package:leave_management_app/bloc/rejectleavebloc.dart';
 import 'package:leave_management_app/data/models/approveleavemodel.dart';
@@ -132,9 +133,8 @@ class _PendingApplicationState extends State<PendingApplication> {
                                           Fluttertoast.showToast(
                                               msg: "Approved");
 
-                                          BlocProvider.of<PendingLeaveBloc>(
-                                                  context)
-                                              .add(CheckPENDINGLEAVE());
+                                          BlocProvider.of<PendingLeaveBloc>(context).add(CheckPENDINGLEAVE());
+                                          BlocProvider.of<LeaveCountBloc>(context).add(CheckCOUNT());
                                         } else if (state is ApproveError) {
                                           Fluttertoast.showToast(
                                             msg: state.error,
@@ -180,6 +180,7 @@ class _PendingApplicationState extends State<PendingApplication> {
                                           BlocProvider.of<PendingLeaveBloc>(
                                               context)
                                               .add(CheckPENDINGLEAVE());
+                                          BlocProvider.of<LeaveCountBloc>(context).add(CheckCOUNT());
                                         } else if (state is RejectError) {
                                           Fluttertoast.showToast(
                                             msg: state.error,

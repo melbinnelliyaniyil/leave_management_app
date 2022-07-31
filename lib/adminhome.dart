@@ -87,26 +87,30 @@ class _AdminHomeState extends State<AdminHome> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: 10, top: 40.0, right: 10, bottom: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: InkWell(
-                      onTap: (){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PendingApplication()));
-                      },
-                      child: Container(
-                        child: Center(
+                      left: 10, top: 0.0, right: 10, bottom: 10),
+                  child: InkWell(
+                    onTap: () {},
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PendingApplication()));
+                        },
+                        child: Container(
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(
+                                width: 12,
+                              ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
                                   Text(
                                     "Pending Applications",
@@ -119,15 +123,15 @@ class _AdminHomeState extends State<AdminHome> {
                                 ],
                               ),
                               SizedBox(
-                                width: 130,
+                                width: 150,
                               ),
-                              Icon(Icons.hourglass_bottom_rounded)
+                              Icon(Icons.hourglass_bottom)
                             ],
                           ),
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * .10,
+                          color: Colors.yellow,
                         ),
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * .10,
-                        color: Colors.yellow,
                       ),
                     ),
                   ),
@@ -161,16 +165,16 @@ class _AdminHomeState extends State<AdminHome> {
                                   ),
                                   Text(
                                     "Total Applications",
-                                    style: TextStyle(fontSize: 20),
+                                    style: TextStyle(fontSize: 17),
                                   ),
                                   Text(
                                     state.leaveCountModel.totalcount.toString(),
-                                    style: TextStyle(fontSize: 24),
+                                    style: TextStyle(fontSize: 27),
                                   )
                                 ],
                               ),
                               SizedBox(
-                                width: 130,
+                                width: 180,
                               ),
                               Icon(Icons.folder_rounded)
                             ],
@@ -190,33 +194,41 @@ class _AdminHomeState extends State<AdminHome> {
                     onTap: () {},
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: InkWell(onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AcceptedApplication()));
-                      },
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AcceptedApplication()));
+                        },
                         child: Container(
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text(
-                                      "Accepted Applications",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    Text(
-                                      state.leaveCountModel.approvedleave!.toString(),
-                                      style: TextStyle(fontSize: 27),
-                                    )
-                                  ],
-                                ),
-                                Icon(Icons.thumb_up_alt_rounded)
-                              ],
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 12,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "Accepted Applications",
+                                    style: TextStyle(fontSize: 17),
+                                  ),
+                                  Text(
+                                    state.leaveCountModel.approvedleave.toString(),
+                                    style: TextStyle(fontSize: 27),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: 150,
+                              ),
+                              Icon(Icons.thumb_up)
+                            ],
                           ),
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * .10,
@@ -229,27 +241,36 @@ class _AdminHomeState extends State<AdminHome> {
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 10, top: 0.0, right: 10, bottom: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: InkWell(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>RejectedApplication()));},
-                      child: Container(
-                        child: Center(
+                  child: InkWell(
+                    onTap: () {},
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RejectedApplication()));
+                        },
+                        child: Container(
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(
+                                width: 12,
+                              ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
                                   Text(
                                     "Rejected Applications",
                                     style: TextStyle(fontSize: 17),
                                   ),
                                   Text(
-                                    state.leaveCountModel.rejectedleave
-                                        .toString(),
+                                    state.leaveCountModel.rejectedleave.toString(),
                                     style: TextStyle(fontSize: 27),
                                   )
                                 ],
@@ -257,13 +278,13 @@ class _AdminHomeState extends State<AdminHome> {
                               SizedBox(
                                 width: 150,
                               ),
-                              Icon(Icons.thumb_down_alt_rounded)
+                              Icon(Icons.thumb_down)
                             ],
                           ),
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * .10,
+                          color: Colors.red,
                         ),
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * .10,
-                        color: Colors.red,
                       ),
                     ),
                   ),
