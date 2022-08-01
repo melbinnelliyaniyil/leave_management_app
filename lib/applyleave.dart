@@ -20,7 +20,7 @@ SingingCharacter? _character = SingingCharacter.Male;
 
 
 class _ApplyLeaveState extends State<ApplyLeave> {
-  int _value = 1;
+  int _value = 0;
   List items = ['Casual leave', 'Sick leave', 'Duty leave'];
   List dayType=['Full Day','First Half','Second Half'];
   String? selectedItem = 'Casual leave';
@@ -78,12 +78,12 @@ class _ApplyLeaveState extends State<ApplyLeave> {
               Row(
                 children: [
                   Radio(
-                    value: 1,
+                    value: 0,
                     groupValue: _value,
                     onChanged: (value) {
                       setState(() {
                         _value = value as int;
-                        _value--;
+                        _value;
                         print(dayType[_value]);
                       });
                     },
@@ -95,12 +95,12 @@ class _ApplyLeaveState extends State<ApplyLeave> {
               Row(
                 children: [
                   Radio(
-                    value: 2,
+                    value: 1,
                     groupValue: _value,
                     onChanged: (value) {
                       setState(() {
                         _value = value as int;
-                        _value--;
+                        _value;
                         print(dayType[_value]);
                       });
                     },
@@ -112,12 +112,13 @@ class _ApplyLeaveState extends State<ApplyLeave> {
               Row(
                 children: [
                   Radio(
-                    value: 3,
+
+                    value: 2,
                     groupValue: _value,
                     onChanged: (value) {
                       setState(() {
                         _value = value as int;
-                        _value--;
+                        _value;
                         print(dayType[_value]);
                       });
                     },

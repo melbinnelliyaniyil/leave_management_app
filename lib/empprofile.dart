@@ -57,7 +57,7 @@ class _EmpProfileState extends State<EmpProfile> {
 
                                   radius: 100,
 
-                                  backgroundImage: AssetImage('assets/login.png'),
+                                  backgroundImage: AssetImage('assets/logo_transparent.png'),
 
                                 ),
                                 // Positioned(
@@ -184,48 +184,11 @@ class _EmpProfileState extends State<EmpProfile> {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:60.0),
-                                      child: Divider(
-                                        height: 5,
-                                        thickness: 0.5,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Row(
 
-                                      children: [
-                                        Icon(Icons.location_city_outlined),
-                                        SizedBox(
-                                          width: 40,
-                                        ),
+                                    // SizedBox(
+                                    //   height: 20,
+                                    // ),
 
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-
-
-                                          children: [
-
-                                            SizedBox(
-                                              width: 122,
-                                            ),
-                                            Text("City:",style: TextStyle(fontSize: 20)),
-
-
-                                            Row(
-                                              children: [
-
-                                                Text(state.profileModel.user!.city.toString(),style: TextStyle(fontSize: 18),),
-                                              ],
-                                            ),
-                                          ],
-
-                                        ),
-                                      ],
-                                    ),
                                     SizedBox(
                                       height: 20,
                                     ),
