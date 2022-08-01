@@ -145,7 +145,7 @@ class _LoginState extends State<Login> {
                                          {Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                                              EmpNavigation()), (Route<dynamic> route) => false);}
 
-                                         BlocProvider.of<EmployeeAllBloc>(context).add(CheckALL(id: state.id));
+                                         BlocProvider.of<EmployeeAllBloc>(context).add(CheckALL());
                                         }
                                       } else if (state is OtpError) {
                                         Fluttertoast.showToast(

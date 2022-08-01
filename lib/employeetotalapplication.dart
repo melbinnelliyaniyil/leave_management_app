@@ -15,7 +15,7 @@ class _TotalApplicationEmployeeState extends State<TotalApplicationEmployee> {
   void initState(){
 
     super.initState();
-
+    BlocProvider.of<EmployeeAllBloc>(context).add(CheckALL());
 
     man();
   }

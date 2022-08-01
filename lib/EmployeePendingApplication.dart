@@ -15,7 +15,7 @@ class _EmployeePendingApplicationState extends State<EmployeePendingApplication>
   void initState(){
 
     super.initState();
-
+    BlocProvider.of<EmployeeAllBloc>(context).add(CheckALL());
 
     man();
   }

@@ -195,7 +195,7 @@ class Repository{
     return selfCountModel;
   }
 
-  Future<EmployeeAllLeaveModel> employeeall({required String url,dynamic data}) async {
+  Future<EmployeeAllLeaveModel> employeeall({required String url}) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
       Fluttertoast.showToast(
@@ -204,7 +204,7 @@ class Repository{
         gravity: ToastGravity.CENTER,
       );
     }
-    final dynamic response = await WebClient.post(url,data);
+    final dynamic response = await WebClient.get(url);
     final EmployeeAllLeaveModel employeeAllLeaveModel = EmployeeAllLeaveModel.fromJson(response);
     return employeeAllLeaveModel;
   }

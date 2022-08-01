@@ -15,7 +15,7 @@ class _EmployeeRejectedApplicationState extends State<EmployeeRejectedApplicatio
   void initState(){
 
     super.initState();
-
+    BlocProvider.of<EmployeeAllBloc>(context).add(CheckALL());
 
     man();
   }

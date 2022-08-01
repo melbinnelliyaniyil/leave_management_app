@@ -21,23 +21,21 @@ class EmployeeAllBloc extends Bloc<EmployeeAllEvent, EmployeeAllState> {
     List<User> pending = [];
     EmployeeAllLeaveModel employeeAllLeaveModel;
     EmployeeAllLeaveModel approvedModel, rejectedModel, pendingModel;
-    Map body = {
-      "id": event.id.toString(),
-    };
+
 ///approved
     approvedModel = await Repository().employeeall(
         url: '/leave/employeeviewsallleave',
-        data: body);
+       );
     ///rejected
     rejectedModel = await Repository().employeeall(
         url: '/leave/employeeviewsallleave',
-        data: body);
+       );
     ///pending
     pendingModel = await Repository().employeeall(
         url: '/leave/employeeviewsallleave',
-        data: body);
+        );
     employeeAllLeaveModel = await Repository()
-        .employeeall(url: '/leave/employeeviewsallleave', data: body);
+        .employeeall(url: '/leave/employeeviewsallleave');
 
     approved = approvedModel.user!
         .where((element) => element.leaveStatus == 'approved')
@@ -68,8 +66,7 @@ class EmployeeAllEvent extends Equatable {
 }
 
 class CheckALL extends EmployeeAllEvent {
-  final String id;
-  CheckALL({required this.id});
+
 }
 
 //states
