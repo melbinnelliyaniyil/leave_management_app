@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leave_management_app/bloc/selfcountbloc.dart';
 import 'package:leave_management_app/data/models/AllLeaveModel.dart';
 import 'package:leave_management_app/data/models/AcceptedLeaveModel.dart';
+import 'package:leave_management_app/data/models/EmployeeAllLeaveModel.dart';
 import 'package:leave_management_app/data/models/PendingLeaveModel.dart';
 import 'package:leave_management_app/data/models/ProfileModel.dart';
 import 'package:leave_management_app/data/models/RejectLeaveModel.dart';
@@ -194,4 +195,17 @@ class Repository{
     return selfCountModel;
   }
 
+  Future<EmployeeAllLeaveModel> employeeall({required String url,dynamic data}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.post(url,data);
+    final EmployeeAllLeaveModel employeeAllLeaveModel = EmployeeAllLeaveModel.fromJson(response);
+    return employeeAllLeaveModel;
+  }
 }

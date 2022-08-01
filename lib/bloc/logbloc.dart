@@ -30,9 +30,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     await Repository().login(url: '/user/login', data: body);
     if (loginModel.status == true) {
       await TempStorage.addToken(loginModel.token.toString());
+      await TempStorage.addRole(loginModel.role.toString());
+      await TempStorage.addId(loginModel.data!.id.toString());
 
 
-      emit(OtpChecked(role: loginModel.data!.role!));
+      emit(OtpChecked(role: loginModel.data!.role!,id: loginModel.data!.id!));
     } else {
       print(loginModel.msg);
       emit(OtpError(error: loginModel.msg.toString()));
@@ -62,8 +64,8 @@ class AuthState extends Equatable {
 
 class CheckingOtp extends AuthState {}
 class OtpChecked extends AuthState {
-  final String role;
-  OtpChecked({required this.role});
+  final String role,id;
+  OtpChecked({required this.role,required this.id});
 }
 
 class OtpError extends AuthState {

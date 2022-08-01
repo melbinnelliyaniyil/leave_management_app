@@ -6,6 +6,8 @@ import 'package:leave_management_app/adminnavigation.dart';
 import 'package:leave_management_app/bloc/logbloc.dart';
 import 'package:leave_management_app/empnavigation.dart';
 
+import 'bloc/employeeallleavebloc.dart';
+
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -135,11 +137,15 @@ class _LoginState extends State<Login> {
                                       if (state is OtpChecked) {
 
                                        if(state.role=='admin'){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminNavigation()));
+                                         {Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                             AdminNavigation()), (Route<dynamic> route) => false);}
                                        }
 
                                         else if(state.role=='Employee'){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>EmpNavigation()));
+                                         {Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                             EmpNavigation()), (Route<dynamic> route) => false);}
+
+                                         BlocProvider.of<EmployeeAllBloc>(context).add(CheckALL(id: state.id));
                                         }
                                       } else if (state is OtpError) {
                                         Fluttertoast.showToast(

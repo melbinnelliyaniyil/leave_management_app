@@ -26,11 +26,15 @@ class AllLeaveBloc extends Bloc<AllLeaveEvent, AllLeaveState> {
       CheckALLLEAVE event, Emitter<AllLeaveState> emit) async {
     emit(CheckingAllLeave());
     AllLeaveModel allLeaveModel;
+    List<User> totalind= [];
 
     // print('"body'+body.toString());
 
     allLeaveModel =
     await Repository().allLeave(url: '/leave/viewsallleave',);
+    totalind = allLeaveModel.user!.where((element) => element.userid?.id == '62dfbc49db380766319765f0').toList();
+    totalind.toString();
+    print("ssssssssssssssss$totalind");
     if (allLeaveModel.status == true) {
       await TempStorage.addId(allLeaveModel.user.toString());
 

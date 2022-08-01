@@ -87,7 +87,7 @@ class _AdminHomeState extends State<AdminHome> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: 10, top: 0.0, right: 10, bottom: 10),
+                      left: 10, top: 40.0, right: 10, bottom: 10),
                   child: InkWell(
                     onTap: () {},
                     child: ClipRRect(

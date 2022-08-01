@@ -5,7 +5,7 @@ import 'package:leave_management_app/helper/tempstorage.dart';
 
 class WebClient {
 
-  static const ip = "http://192.168.43.227:5050";
+  static const ip = "http://192.168.1.34:5050";
 
 
   static Future<dynamic> post(url, data) async {
