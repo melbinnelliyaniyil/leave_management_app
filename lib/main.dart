@@ -10,11 +10,14 @@ import 'package:leave_management_app/bloc/addstaffbloc.dart';
 import 'package:leave_management_app/bloc/allleavebloc.dart';
 import 'package:leave_management_app/bloc/applyleavebloc.dart';
 import 'package:leave_management_app/bloc/approveleavebloc.dart';
+import 'package:leave_management_app/bloc/employeeallleavebloc.dart';
 import 'package:leave_management_app/bloc/leavecountbloc.dart';
 import 'package:leave_management_app/bloc/logbloc.dart';
 import 'package:leave_management_app/bloc/pendingleavebloc.dart';
 import 'package:leave_management_app/bloc/profilebloc.dart';
 import 'package:leave_management_app/bloc/rejectleavebloc.dart';
+import 'package:leave_management_app/bloc/selfcountbloc.dart';
+import 'package:leave_management_app/data/models/EmployeeAllLeaveModel.dart';
 import 'package:leave_management_app/emphome.dart';
 import 'package:leave_management_app/empnavigation.dart';
 import 'package:leave_management_app/helper/pendingApplication.dart';
@@ -25,20 +28,24 @@ import 'package:leave_management_app/login.dart';
 import 'bloc/rejectedleavebloc.dart';
 
 void main() {
+  var token=null;
   runApp(const MyApp());
 
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
+
   Widget build(BuildContext context) {
 
 
     return MultiBlocProvider(
       providers: [
+
         BlocProvider<AuthBloc>(create: (context)=> AuthBloc()),
         BlocProvider<AddStaffBloc>(create: (context)=> AddStaffBloc()),
         BlocProvider<ApplyLeaveBloc>(create: (context)=> ApplyLeaveBloc()),
@@ -50,6 +57,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<AcceptedLeaveBloc>(create: (context)=> AcceptedLeaveBloc()),
         BlocProvider<RejectedLeaveBloc>(create: (context)=> RejectedLeaveBloc()),
         BlocProvider<ProfileBloc>(create: (context)=> ProfileBloc()),
+        BlocProvider<SelfCountBloc>(create: (context)=> SelfCountBloc()),
+        BlocProvider<EmployeeAllBloc>(create: (context)=> EmployeeAllBloc()),
       ],
       child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -66,7 +75,7 @@ class MyApp extends StatelessWidget {
               // is not restarted.
               primarySwatch: Colors.teal,
             ),
-            home: const Login()
+            home:  Login()
       ),
     );
   }
