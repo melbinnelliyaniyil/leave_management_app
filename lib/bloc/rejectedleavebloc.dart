@@ -24,7 +24,7 @@ class RejectedLeaveBloc extends Bloc<RejectedLeaveEvent, RejectedLeaveState> {
     // print('"body'+body.toString());
 
     rejectedLeaveModel =
-    await Repository().rejectedleave(url: '/leave/viewleavestatusrejected',);
+    await Repository().rejectedleave(url: '/leave/viewleavestatusrejectedd',);
     if (rejectedLeaveModel.status == true) {
 
 
